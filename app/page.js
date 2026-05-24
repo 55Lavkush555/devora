@@ -1,65 +1,117 @@
-import Image from "next/image";
+"use client";
+import Navbar from "@/components/Navbar";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import CategoryCard from "@/components/category-card";
+import ArticleCard from "@/components/article-card";
+import { useState } from "react";
+import Footer from "@/components/Footer";
 
 export default function Home() {
+  const [recentArticles, setRecentArticles] = useState([
+    {
+      title: "The Future of React: Server Components Deep Dive",
+      author: "Lavkush",
+      date: "1 Jan 2023",
+      category: "React",
+      imageURL: "https://static.vecteezy.com/system/resources/thumbnails/072/929/774/small/a-finger-touches-a-digital-screen-displaying-a-web-development-interface-with-icons-representing-coding-cloud-computing-database-and-website-design-symbolizing-innovation-and-technological-advancement-photo.jpg",
+    },
+    {
+      title: "Mastering Tailwind CSS: Advanced Techniques & Patterns",
+      author: "John",
+      date: "23 May 2023",
+      category: "Frontend",
+      imageURL: "https://www.shutterstock.com/image-vector/software-development-coding-backend-engineering-600w-2744417173.jpg",
+    },  
+    {
+      title: "Kubernetes in Production: Best Practices & Pitfalls",
+      author: "Tim",
+      date: "23 May 2023",
+      category: "Frontend",
+      imageURL: "https://thumbs.dreamstime.com/b/performance-28912532.jpg",
+    }  
+  ])
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div>
+      <Navbar />
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          ease: "easeOut",
+        }}
+        className="h-[calc(100vh-44px)] flex flex-col justify-center gap-5 items-center"
+      >
+
+        <h1 className="text-5xl h-14 font-bold bg-gradient-to-r from-[#89a1ff] to-[#00cfc4] bg-clip-text text-transparent max-[568px]:text-4xl max-[568px]:h-11 max-[426px]:text-[29px]">Insights into the Future</h1>
+
+        <h1 className="text-5xl font-bold max-[568px]:text-4xl max-[568px]:h-auto max-[426px]:text-[29px]">of Technology</h1>
+
+        <p className="text-center text-secondaryForeground">Discover in-depth articles about web development, design, AI, and technology trends from industry experts.</p>
+
+        <div className="flex flex-wrap gap-3 items-center justify-center">
+
+          <Link href={'/blogs'}><button className="w-fit text-[18px] px-4 py-2 bg-gradient-to-r from-[#89a1ff] to-[#00cfc4] cursor-pointer rounded-lg text-white transition-transform duration-300 hover:scale-102">Explore articles</button></Link>
+
+          <Link href={'/#categories'}><button className="w-fit text-[18px] px-4 py-2 cursor-pointer rounded-lg border-[1px] border-[#eee5e7] dark:border-[#20212b] transition-transform duration-300 hover:scale-102 hover:bg-[#e0f4f1] dark:hover:bg-[#041a1a]">Browse categories</button></Link>
+
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </motion.div>
+
+      <div className="bg-secondaryLight dark:bg-secondaryDark py-10" id="categories">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.7,
+            ease: "easeOut",
+          }}
+          viewport={{ once: true }}
+          className="featured-articles container mx-auto bg-secondaryLight dark:bg-secondaryDark text-center"
+        >
+
+          <h1 className="text-3xl font-medium">Explore Categories</h1>
+          <p className="text-secondaryForeground">Find content in your areas of interest</p>
+
+          <div className="categories-container flex flex-wrap justify-center gap-6 mt-5 text-start">
+            <CategoryCard category={"Web development"} description={"Learn modern web development with frontend, backend, APIs, frameworks, and real-world projects."} iconColor={0} />
+            <CategoryCard category={"React"} description={"Explore React concepts, hooks, component architecture, state management, and scalable UI development."} iconColor={1} />
+            <CategoryCard category={"Next.js"} description={"Build production-ready full stack applications using Next.js, App Router, Server Actions, and modern patterns."} iconColor={2} />
+            <CategoryCard category={"JavaScript"} description={"Master JavaScript fundamentals, ES6+, async programming, DOM manipulation, and advanced concepts."} iconColor={3} />
+            <CategoryCard category={"Python"} description={"Learn Python programming for automation, backend development, scripting, and problem solving."} iconColor={4} />
+            <CategoryCard category={"AI"} description={"Discover artificial intelligence, machine learning, AI tools, and practical AI-powered development workflows."} iconColor={5} />
+          </div>
+        </motion.div>
+
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.7,
+          ease: "easeOut",
+        }}
+        viewport={{ once: true }}
+        className="text-center container mx-auto my-10"
+      >
+        <h1 className="text-3xl font-medium">Recent Articles</h1>
+        <p className="text-secondaryForeground">Latest from our community</p>
+
+        <div className="articles-container mt-10 flex flex-wrap justify-center gap-5">
+
+          {
+            recentArticles.map((article, index) => (
+              <ArticleCard key={index} title={article.title} author={article.author} date={article.date} category={article.category} imageURL={article.imageURL} uid={"12h3hc3xaadf3"} />
+            ))
+          }
         </div>
-      </main>
+      </motion.div>
+      
+      <Footer />
     </div>
   );
 }
