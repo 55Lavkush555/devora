@@ -4,33 +4,32 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import CategoryCard from "@/components/category-card";
 import ArticleCard from "@/components/article-card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 
+
 export default function Home() {
-  const [recentArticles, setRecentArticles] = useState([
-    {
-      title: "The Future of React: Server Components Deep Dive",
-      author: "Lavkush",
-      date: "1 Jan 2023",
-      category: "React",
-      imageURL: "https://static.vecteezy.com/system/resources/thumbnails/072/929/774/small/a-finger-touches-a-digital-screen-displaying-a-web-development-interface-with-icons-representing-coding-cloud-computing-database-and-website-design-symbolizing-innovation-and-technological-advancement-photo.jpg",
-    },
-    {
-      title: "Mastering Tailwind CSS: Advanced Techniques & Patterns",
-      author: "John",
-      date: "23 May 2023",
-      category: "Frontend",
-      imageURL: "https://www.shutterstock.com/image-vector/software-development-coding-backend-engineering-600w-2744417173.jpg",
-    },  
-    {
-      title: "Kubernetes in Production: Best Practices & Pitfalls",
-      author: "Tim",
-      date: "23 May 2023",
-      category: "Frontend",
-      imageURL: "https://thumbs.dreamstime.com/b/performance-28912532.jpg",
-    }  
-  ])
+  const [recentArticles, setRecentArticles] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const loadBlogs = async () => {
+      let req = await fetch('/api/blogs/latest')
+      let data = await req.json()
+
+      if (data.success) {
+        await data.blogs.forEach(blog => {
+          blog.date = new Date(blog.createdAt).toDateString();
+        })
+
+        setRecentArticles(data.blogs)
+        setIsLoading(false)
+      }
+    }
+
+    loadBlogs()
+  }, [])
+
 
   return (
     <div>
@@ -46,9 +45,9 @@ export default function Home() {
         className="h-[calc(100vh-44px)] flex flex-col justify-center gap-5 items-center"
       >
 
-        <h1 className="text-5xl h-14 font-bold bg-gradient-to-r from-[#89a1ff] to-[#00cfc4] bg-clip-text text-transparent max-[568px]:text-4xl max-[568px]:h-11 max-[426px]:text-[29px]">Insights into the Future</h1>
+        <h1 className="text-5xl h-14 font-bold bg-gradient-to-r from-[#89a1ff] to-[#00cfc4] bg-clip-text text-transparent max-[568px]:text-4xl max-[568px]:h-11 max-[426px]:text-[29px] max-[343px]:text-[27px]">Insights into the Future</h1>
 
-        <h1 className="text-5xl font-bold max-[568px]:text-4xl max-[568px]:h-auto max-[426px]:text-[29px]">of Technology</h1>
+        <h1 className="text-5xl font-bold max-[568px]:text-4xl max-[568px]:h-auto max-[426px]:text-[29px] max-[343px]:text-[27px]">of Technology</h1>
 
         <p className="text-center text-secondaryForeground">Discover in-depth articles about web development, design, AI, and technology trends from industry experts.</p>
 
@@ -77,12 +76,17 @@ export default function Home() {
           <p className="text-secondaryForeground">Find content in your areas of interest</p>
 
           <div className="categories-container flex flex-wrap justify-center gap-6 mt-5 text-start">
-            <CategoryCard category={"Web development"} description={"Learn modern web development with frontend, backend, APIs, frameworks, and real-world projects."} iconColor={0} />
-            <CategoryCard category={"React"} description={"Explore React concepts, hooks, component architecture, state management, and scalable UI development."} iconColor={1} />
-            <CategoryCard category={"Next.js"} description={"Build production-ready full stack applications using Next.js, App Router, Server Actions, and modern patterns."} iconColor={2} />
-            <CategoryCard category={"JavaScript"} description={"Master JavaScript fundamentals, ES6+, async programming, DOM manipulation, and advanced concepts."} iconColor={3} />
-            <CategoryCard category={"Python"} description={"Learn Python programming for automation, backend development, scripting, and problem solving."} iconColor={4} />
-            <CategoryCard category={"AI"} description={"Discover artificial intelligence, machine learning, AI tools, and practical AI-powered development workflows."} iconColor={5} />
+            <CategoryCard category={"Frontend"} description={"Learn HTML, CSS, Tailwind CSS, responsive design, animations, and modern frontend development techniques."} iconColor={0} />
+
+            <CategoryCard category={"Backend"} description={"Build powerful backend systems with APIs, databases, authentication, and server-side development."} iconColor={1} />
+
+            <CategoryCard category={"Python"} description={"Learn Python programming for automation, scripting, backend development, and real-world applications."} iconColor={2} />
+
+            <CategoryCard category={"AI"} description={"Explore artificial intelligence, machine learning, AI tools, and modern AI-powered workflows."} iconColor={3} />
+
+            <CategoryCard category={"DevOps"} description={"Understand deployment, CI/CD, Docker, cloud platforms, monitoring, and scalable infrastructure."} iconColor={4} />
+
+            <CategoryCard category={"Other"} description={"Discover programming tips, developer tools, productivity hacks, and various tech-related topics."} iconColor={5} />
           </div>
         </motion.div>
 
@@ -104,13 +108,49 @@ export default function Home() {
         <div className="articles-container mt-10 flex flex-wrap justify-center gap-5">
 
           {
-            recentArticles.map((article, index) => (
-              <ArticleCard key={index} title={article.title} author={article.author} date={article.date} category={article.category} imageURL={article.imageURL} uid={"12h3hc3xaadf3"} />
-            ))
+            isLoading
+              ? Array.from({ length: 3 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="relative w-76 bg-card rounded-2xl overflow-hidden min-h-[355px] border-[1px] border-border text-start flex flex-col gap-3 animate-pulse"
+                >
+
+                  {/* Category Skeleton */}
+                  <div className="absolute top-2 left-2 h-7 w-24 rounded-2xl bg-muted"></div>
+
+                  {/* Image Skeleton */}
+                  <div className="h-[200px] w-full bg-muted"></div>
+
+                  {/* Title Skeleton */}
+                  <div className="px-3 mt-1 space-y-2">
+                    <div className="h-5 w-[90%] rounded bg-muted"></div>
+                    <div className="h-5 w-[70%] rounded bg-muted"></div>
+                  </div>
+
+                  {/* Author + Date Skeleton */}
+                  <div className="px-3 mt-auto mb-3 space-y-2">
+                    <div className="h-4 w-28 rounded bg-muted"></div>
+                    <div className="h-3 w-20 rounded bg-muted"></div>
+                  </div>
+
+                </div>
+              ))
+              : recentArticles.map((article, index) => (
+                <ArticleCard
+                  key={index}
+                  title={article.title}
+                  author={article.author}
+                  date={article.date}
+                  category={article.category}
+                  imageURL={article.imageURL}
+                  uid={article._id}
+                />
+              ))
           }
+
         </div>
       </motion.div>
-      
+
       <Footer />
     </div>
   );

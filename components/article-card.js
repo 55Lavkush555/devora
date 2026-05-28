@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
 
-const ArticleCard = ({ title, author, date, category, imageURL, uid }) => {
+const ArticleCard = ({ title, date, category, imageURL, uid }) => {
   return (
     <Link href={`/blogs/${uid}`}>
 
@@ -10,11 +10,11 @@ const ArticleCard = ({ title, author, date, category, imageURL, uid }) => {
         <span className='absolute top-2 left-2 rounded-2xl p-1 px-3 text-[12px] bg-gradient-to-r from-purple-500 to-blue-500 text-white'>{category}</span>
         <Image src={imageURL} width={304} height={200} alt='article' className='h-[200px] object-cover' />
 
-        <h3 className='text-[20px] font-semibold ml-3'>{title}</h3>
+        <p className='ml-3 mb-1.5 text-secondaryForeground text-[12px]'>{date}</p>
         <div>
-          <p className='ml-3 text-secondaryForeground text-lg'>{author}</p>
-          <p className='ml-3 mb-1.5 text-secondaryForeground text-[12px]'>{date}</p>
+          <h3 className='text-[20px] font-semibold ml-3 max-h-[90px] overflow-hidden'>{title}</h3>
         </div>
+      <span className='absolute bottom-2 right-2 text-[12px] text-secondaryForeground'>read more...</span>
       </div>
     </Link>
   )

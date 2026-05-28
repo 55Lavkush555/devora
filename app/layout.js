@@ -2,6 +2,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Poppins } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import SyncUser from "@/components/SyncUser";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Devora",
   description: "A modern blogging platform. ",
-   icons: {
+  icons: {
     icon: "/img/favicon.svg",
   },
 };
@@ -29,16 +32,33 @@ const poppins = Poppins({
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
-      suppressHydrationWarning
-    >
-      <body className={`min-h-full flex flex-col ${poppins.variable}`}>
-        <Providers>
-          {children}
-        </Providers>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html
+        lang="en"
+        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+        suppressHydrationWarning
+      >
+        <body className={`min-h-full flex flex-col ${poppins.variable}`}>
+          <Providers>
+            <SyncUser />
+            {children}
+
+            <Toaster
+              position="top-right"
+              richColors
+              expand
+              visibleToasts={3}
+              closeButton
+              toastOptions={{
+                classNames: {
+                  toast:
+                    "rounded-2xl border border-border bg-card text-foreground",
+                },
+              }}
+            />
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

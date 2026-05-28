@@ -12,7 +12,7 @@ const CategoryCard = ({ category, description, iconColor }) => {
     "bg-pink-400",
   ]
 
-  const slug = category.replace(/\s+/g, '-').toLowerCase();
+  const slug = category.replace(/\s+/g, '-');
 
   return (
     <Link href={`/category/${slug}`}>

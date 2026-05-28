@@ -9,15 +9,12 @@ import {
 } from "@/components/ui/select";
 
 const categories = [
-    "Web Development",
-    "JavaScript",
-    "React",
-    "Next.js",
-    "Python",
-    "AI / ML",
-    "CSS",
+    "Frontend",
     "Backend",
     "DevOps",
+    "Python",
+    "AI",
+    "Other",
 ];
 
 const CategorySelect = ({ category, setCategory }) => {

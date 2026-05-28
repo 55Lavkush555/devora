@@ -6,18 +6,20 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import ArticleCard from "@/components/article-card";
 import Footer from "@/components/Footer";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 
 const page = () => {
+    const { slug } = useParams()
+    const [search, setSearch] = useState(decodeURIComponent(slug))
     const [Articles, setArticles] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [totalPages, setTotalPages] = useState(null)
-    const [page, setPage] = useState(1)
-    const [search, setSearch] = useState("")
+    const [totalBlogs, setTotalBlogs] = useState(null)
+
 
     useEffect(() => {
         const loadBlogs = async () => {
-            let req = await fetch("/api/blogs?limit=9")
+            let req = await fetch(`/api/blogs/search/${slug}`)
             let data = await req.json()
 
             if (data.success) {
@@ -26,39 +28,12 @@ const page = () => {
                 })
                 setArticles(data.blogs)
                 setIsLoading(false)
-                setTotalPages(data.totalPages)
+                setTotalBlogs(data.totalBlogs)
             }
         }
 
         loadBlogs()
     }, [])
-
-    const fetchPage = async (pageNumber) => {
-        setIsLoading(true)
-        let req = await fetch(`/api/blogs?page=${pageNumber}&limit=9`)
-        let data = await req.json()
-        if (data.success) {
-            await data.blogs.forEach(blog => {
-                blog.date = new Date(blog.createdAt).toDateString();
-            })
-            setArticles(data.blogs)
-            setIsLoading(false)
-        }
-    }
-
-    const nextPage = async () => {
-        if (page < totalPages) {
-            await fetchPage(page + 1)
-            setPage(page + 1)
-        }
-    }
-
-    const previousPage = async () => {
-        if (page > 1) {
-            await fetchPage(page - 1)
-            setPage(page - 1)
-        }
-    }
 
     return (
         <div>
@@ -73,8 +48,8 @@ const page = () => {
                 }}
                 className="h-[50vh] flex justify-center items-center flex-col gap-3.5 bg-secondaryLight dark:bg-secondaryDark"
             >
-                <h1 className="text-5xl font-bold">All Articles</h1>
-                <p className="text-secondaryForeground">Browse our complete collection</p>
+                <h1 className="text-5xl font-bold">🔍 Search</h1>
+                <p className="text-secondaryForeground text-center">{totalBlogs} results found for "{search}"</p>
             </motion.div>
             <div className="h-px bg-border w-full "></div>
 
@@ -109,7 +84,7 @@ const page = () => {
                     </Link>
                 </div>
 
-                <div className="articles-container w-[95%] mx-auto mt-10 flex flex-wrap justify-center gap-5">
+                <div className="min-h-[50vh] articles-container w-[95%] mx-auto mt-10 flex flex-wrap justify-center gap-5">
 
                     {
                         isLoading
@@ -139,7 +114,7 @@ const page = () => {
 
                                 </div>
                             ))
-                            : Articles.map((article, index) => (
+                            : (Articles.length > 0 ? Articles.map((article, index) => (
                                 <ArticleCard
                                     key={index}
                                     title={article.title}
@@ -149,22 +124,8 @@ const page = () => {
                                     imageURL={article.imageURL}
                                     uid={article._id}
                                 />
-                            ))
+                            )) : <h2 className="text-2xl text-center text-secondaryForeground">No results found for "{search}"</h2>)
                     }
-                </div>
-
-                <div className="w-full flex justify-center items-center mt-6">
-                    <div className="flex gap-5 items-center">
-                        <button onClick={() => previousPage()} disabled={page === 1} className={`px-3 py-[6px] bg-[#9796ff] rounded-lg text-[18px] cursor-pointer text-white dark:hover:bg-[#8887e7] hover:bg-[#867bfe] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed`}>
-                            ◀️
-                        </button>
-
-                        <span className="px-3 py-[6px] rounded-lg border border-border">Page {page}</span>
-
-                        <button onClick={() => nextPage()} disabled={!totalPages || page === totalPages} className={`px-3 py-[6px] bg-[#9796ff] rounded-lg text-[18px] cursor-pointer text-white dark:hover:bg-[#8887e7] hover:bg-[#867bfe] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed`}>
-                            ▶️
-                        </button>
-                    </div>
                 </div>
 
             </motion.div>
