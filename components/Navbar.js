@@ -27,7 +27,7 @@ const Navbar = () => {
 
                 <ul className="flex gap-4 items-center text-[16px] font-semibold max-[630px]:hidden">
                     <li><Link href={"/"} className="hover:text-[#8b8aeb] transition-colors duration-300 border-[#8b8aed] hover:border-b-2 hover:border-[#8b8aed]">Home</Link></li>
-                    <li><Link href={"/#categories"} className="hover:text-[#8b8aeb] transition-colors duration-300 border-[#8b8aed] hover:border-b-2 hover:border-[#8b8aed]">Categories</Link></li>
+                    <li><Link href={"/category"} className="hover:text-[#8b8aeb] transition-colors duration-300 border-[#8b8aed] hover:border-b-2 hover:border-[#8b8aed]">Categories</Link></li>
                     <li><Link href={"/blogs"} className="hover:text-[#8b8aeb] transition-colors duration-300 border-[#8b8aed] hover:border-b-2 hover:border-[#8b8aed]">Blogs</Link></li>
                 </ul>
 
@@ -65,7 +65,7 @@ const Navbar = () => {
             <div className={`${isOpen ? "block" : "hidden"} container mx-auto mt-2 min-[630px]:hidden`}>
                 <ul className="flex flex-col gap-4 items-center text-[16px] font-semibold">
                     <li><Link href={"/"} className="hover:text-[#8b8aeb] transition-colors duration-300 border-[#8b8aed] hover:border-b-2 hover:border-[#8b8aed]">Home</Link></li>
-                    <li><Link href={"/#categories"} className="hover:text-[#8b8aeb] transition-colors duration-300 border-[#8b8aed] hover:border-b-2 hover:border-[#8b8aed]">Categories</Link></li>
+                    <li><Link href={"/category"} className="hover:text-[#8b8aeb] transition-colors duration-300 border-[#8b8aed] hover:border-b-2 hover:border-[#8b8aed]">Categories</Link></li>
                     <li><Link href={"/blogs"} className="hover:text-[#8b8aeb] transition-colors duration-300 border-[#8b8aed] hover:border-b-2 hover:border-[#8b8aed]">Blogs</Link></li>
                 </ul>
                 <div className="h-px bg-border w-full mt-2"></div>

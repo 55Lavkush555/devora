@@ -55,7 +55,7 @@ export default function Home() {
 
           <Link href={'/blogs'}><button className="w-fit text-[18px] px-4 py-2 bg-gradient-to-r from-[#89a1ff] to-[#00cfc4] cursor-pointer rounded-lg text-white transition-transform duration-300 hover:scale-102">Explore articles</button></Link>
 
-          <Link href={'/#categories'}><button className="w-fit text-[18px] px-4 py-2 cursor-pointer rounded-lg border-[1px] border-[#eee5e7] dark:border-[#20212b] transition-transform duration-300 hover:scale-102 hover:bg-[#e0f4f1] dark:hover:bg-[#041a1a]">Browse categories</button></Link>
+          <Link href={'/category'}><button className="w-fit text-[18px] px-4 py-2 cursor-pointer rounded-lg border-[1px] border-[#eee5e7] dark:border-[#20212b] transition-transform duration-300 hover:scale-102 hover:bg-[#e0f4f1] dark:hover:bg-[#041a1a]">Browse categories</button></Link>
 
         </div>
       </motion.div>

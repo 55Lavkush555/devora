@@ -28,12 +28,12 @@ const page = () => {
       if (data.success) {
         await data.blogs.forEach(blog => {
           blog.date = new Date(blog.createdAt).toDateString();
-          setArticles(data.blogs)
-          setTotalPages(data.totalPages)
-          setIsLoading(false)
-          setTotalArticles(data.totalBlogs)
         })
       }
+      setTotalPages(data.totalPages)
+      setIsLoading(false)
+      setTotalArticles(data.totalBlogs)
+      setArticles(data.blogs)
     }
     loadBlogs()
   }, [])
@@ -157,7 +157,7 @@ const page = () => {
                   imageURL={article.imageURL}
                   uid={article._id}
                 />
-              )) : <h2 className="text-2xl text-center text-secondaryForeground">No articles found in this category</h2>)
+              )) : <h2 className="text-2xl text-center text-secondaryForeground min-h-[50vh]">No articles found in this category</h2>)
           }
         </div>
 

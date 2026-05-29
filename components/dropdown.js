@@ -14,6 +14,15 @@ const categories = [
     "DevOps",
     "Python",
     "AI",
+    "Cloud Computing",
+    "Data Science",
+    "Cybersecurity",
+    "Mobile Development",
+    "UI Design",
+    "JavaScript",
+    "Testing",
+    "Productivity",
+    "Career Growth",
     "Other",
 ];
 

@@ -145,7 +145,7 @@ const page = () => {
                     <h2 className='text-2xl'>Your articles</h2>
                     <p className='text-secondaryForeground'>You have {totalBlogs !== null ? totalBlogs : 'Loading...'} articles</p>
 
-                    <div className="search flex gap-2 items-center justify-center">
+                    <div className="search flex gap-2 items-center justify-center mt-4">
                         <input value={search} onChange={(e) => setSearch(e.target.value)} type="text" className="bg-card border-border border-2 rounded-lg text-[18px] px-2 py-1 w-3xs" placeholder="Search" />
 
                         <Link href={`/search/${encodeURIComponent(search)}`} className="px-3 py-[6px] bg-[#9796ff] rounded-lg text-[18px] cursor-pointer text-white dark:hover:bg-[#8887e7] hover:bg-[#867bfe] transition-all duration-300">
