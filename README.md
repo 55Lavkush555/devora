@@ -155,22 +155,6 @@ Only the original blog creator can edit or delete their blogs.
 
 ---
 
-# 📁 Folder Structure
-
-```bash
-src/
-├── app/
-├── components/
-├── lib/
-├── models/
-├── actions/
-├── hooks/
-├── utils/
-└── styles/
-```
-
----
-
 # 🚀 Performance & Scalability
 
 Devora was built with optimization and scalability in mind.
