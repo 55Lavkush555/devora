@@ -1,3 +1,8 @@
+![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-green)
+![Clerk](https://img.shields.io/badge/Auth-Clerk-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 # Devora 🚀
 
 A modern full-stack developer blogging platform built with a production-focused architecture using Next.js, MongoDB, and Clerk Authentication.
@@ -21,6 +26,20 @@ The project focuses on:
 - Production-ready implementation
 
 This project was built independently without following a complete tutorial, focusing on system design, optimization, scalability, and real product-building experience.
+
+---
+
+# 📸 Screenshots
+
+### Home Page
+<img src="https://media.licdn.com/dms/image/v2/D4D2DAQH-i5fO-iB9mQ/profile-treasury-image-shrink_1280_1280/B4DZ55Q5CRGYAY-/0/1780150931881?e=1780934400&v=beta&t=zbf1bnsu1YhUFIdReJFFciN4JZVDXKz0rlmcIKC4RTo" alt="Home Page" width="500" />
+
+
+### Blog Page
+<img src="https://media.licdn.com/dms/image/v2/D4D2DAQEKE8S2UhMBRg/profile-treasury-image-shrink_1280_1280/B4DZ55ROfYJsAc-/0/1780151019775?e=1780934400&v=beta&t=xQjYJ87-6P-hqz2iWxvQCqW7Khv4T2vw08qxz0qMWp0" alt="Blog Page" width="500" />
+
+### Dashboard
+<img src="https://media.licdn.com/dms/image/v2/D4D2DAQHWwJInz12ZJQ/profile-treasury-image-shrink_1280_1280/B4DZ55RHLxG4AY-/0/1780150989904?e=1780934400&v=beta&t=fhQAlNMqOrM9tTmRbead4ok-uuUS9I_v5T64XMU7nPE" alt="Home Page" width="500" />
 
 ---
 
@@ -187,7 +206,7 @@ This project helped improve skills in:
 
 ```bash
 # Clone repository
-git clone <your-repo-url>
+git clone https://github.com/55Lavkush555/devora.git
 
 # Install dependencies
 npm install
@@ -206,12 +225,37 @@ Create a `.env.local` file and add:
 MONGODB_URI=
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 ```
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+Please read CONTRIBUTING.md before submitting issues or pull requests.
+
+---
+
+# 🗺️ Roadmap
+
+## Phase 1
+- Comments System
+- Blog Likes
+- Reading Time
+
+## Phase 2
+- Followers System
+- Notifications
+- Analytics Dashboard
+
+## Phase 3
+- AI Summaries
+- AI Recommendations
+- Advanced Search
 
 ---
 
