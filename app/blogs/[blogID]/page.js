@@ -6,7 +6,7 @@ import Image from 'next/image';
 import ReactMarkdown from "react-markdown";
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
-import { toast } from "sonner"
+import { toast } from "sonner";
 import Link from 'next/link';
 
 // 👇 Skeleton Component — Tera layout dekh ke banaya
@@ -156,6 +156,14 @@ const page = () => {
             toast.error(err.message || "An error occurred while removing the article from saved list.")
         }
     }
+    const copyToClipboard = async (code) => {
+  try {
+    await navigator.clipboard.writeText(code);
+    toast.success("Code copied to clipboard!");
+  } catch (error) {
+    toast.error("Failed to copy code");
+  }
+};
 
     // 👇 Jab tak fetch nahi hua
     if (loading) return (
@@ -229,7 +237,41 @@ const page = () => {
                     </div>
 
                     <div className='mt-7 prose dark:prose-invert max-w-none w-[95%] mx-auto'>
-                        <ReactMarkdown>{blog.content}</ReactMarkdown>
+                        <ReactMarkdown
+  components={{
+    code({ inline, children, className, ...props }) {
+      const codeString = String(children).replace(/\n$/, "");
+
+      if (inline) {
+        return (
+          <code className={className} {...props}>
+            {children}
+          </code>
+        );
+      }
+
+      return (
+        <div className="relative">
+          <button
+            onClick={() => copyToClipboard(codeString)}
+            className="absolute top-2 right-2 z-10 px-2 py-1 text-xs rounded bg-gray-700 text-white hover:bg-gray-600 transition-colors"
+            aria-label="Copy code"
+          >
+            Copy
+          </button>
+
+          <pre className="overflow-x-auto">
+            <code className={className} {...props}>
+              {children}
+            </code>
+          </pre>
+        </div>
+      );
+    },
+  }}
+>
+  {blog.content}
+</ReactMarkdown>
                     </div>
                 </div>
             </motion.div>
